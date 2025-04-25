@@ -3,14 +3,16 @@ const Todos = require("../models/todos");
 
 const createTodo = async (req, res) => {
   try {
-    const { title, description } = req.body;
-    console.log(req.user);
+    const { title, description, deadline, priority } = req.body;
 
     const todo = await Todos.create({
       title,
       description,
+      deadline,
+      priority,
       owner_id: req.user?.id,
     });
+
     res.status(201).json(todo);
   } catch (error) {
     res.status(500).json({ error: "Không thể tạo todo" });

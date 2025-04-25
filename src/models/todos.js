@@ -16,6 +16,17 @@ const Todos = sequelize.define(
     description: {
       type: DataTypes.TEXT,
     },
+    deadline: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    priority: {
+      type: DataTypes.STRING,
+      defaultValue: "medium",
+      validate: {
+        isIn: [["low", "medium", "high"]],
+      },
+    },
     owner_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -26,6 +37,7 @@ const Todos = sequelize.define(
     underscored: true,
   }
 );
+
 Todos.belongsTo(Users, { foreignKey: "owner_id", onDelete: "CASCADE" });
 
 module.exports = Todos;
