@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 // Route
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/todo", todoRoutes);
+app.use("/api/v1/todos", todoRoutes);
 app.use("/api/v1/share-todo", shareTodoRoutes);
 app.use("/api/v1/my-profile", profileRoutes);
 app.use("/api/v1/users", userRoutes);
