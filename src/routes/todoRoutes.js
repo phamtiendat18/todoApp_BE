@@ -1,5 +1,11 @@
 const express = require("express");
-const { createTodo, getTodos } = require("../controllers/todoController");
+const {
+  createTodo,
+  getTodos,
+  getTodo,
+  updateTodo,
+  deleteTodo,
+} = require("../controllers/todoController");
 const {
   authenticateUser,
   verifyUser,
@@ -9,5 +15,8 @@ const router = express.Router();
 
 router.post("/", authenticateUser, createTodo);
 router.get("/", authenticateUser, getTodos);
+router.get("/todos/:id", authenticateUser, getTodo);
+router.put("/todos/:id", authenticateUser, updateTodo);
+router.delete("/todos/:id", authenticateUser, deleteTodo);
 
 module.exports = router;

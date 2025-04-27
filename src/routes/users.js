@@ -7,7 +7,7 @@ const { getMyProfile, uploadAvatar } = require("../controllers/userController");
 const upload = require("../middlewares/upload");
 var router = express.Router();
 
-router.post("/", authenticateUser, getMyProfile);
+router.get("/", authenticateUser, getMyProfile);
 router.post(
   "/upload-avatar/:id",
   verifyUser,
