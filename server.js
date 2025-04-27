@@ -1,4 +1,3 @@
-// app.js
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -6,9 +5,10 @@ const cookieParser = require("cookie-parser");
 
 const sequelize = require("./src/configs/database");
 const authRoutes = require("./src/routes/authRoutes");
-const userRoutes = require("./src/routes/users");
+const profileRoutes = require("./src/routes/profileRoutes");
 const todoRoutes = require("./src/routes/todoRoutes");
 const shareTodoRoutes = require("./src/routes/shareTodoRoutes");
+const userRoutes = require("./src/routes/userRoutes");
 
 dotenv.config();
 
@@ -19,11 +19,10 @@ app.use(cookieParser());
 
 // Route
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/my-profile", userRoutes);
 app.use("/api/v1/todo", todoRoutes);
 app.use("/api/v1/share-todo", shareTodoRoutes);
-
-// Kết nối cơ sở dữ liệu và chạy server
+app.use("/api/v1/my-profile", profileRoutes);
+app.use("/api/v1/users", userRoutes);
 
 const PORT = process.env.PORT;
 sequelize

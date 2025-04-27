@@ -3,7 +3,11 @@ const {
   authenticateUser,
   verifyUser,
 } = require("../middlewares/authMiddleware");
-const { getMyProfile, uploadAvatar } = require("../controllers/userController");
+const {
+  getMyProfile,
+  uploadAvatar,
+  searchUsers,
+} = require("../controllers/userController");
 const upload = require("../middlewares/upload");
 var router = express.Router();
 
@@ -14,5 +18,6 @@ router.post(
   upload.single("avatar"),
   uploadAvatar
 );
+router.get("/search", searchUsers);
 
 module.exports = router;

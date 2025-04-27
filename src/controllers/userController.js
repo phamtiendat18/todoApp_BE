@@ -1,6 +1,7 @@
 const Users = require("../models/users");
 
 const cloudinary = require("../configs/cloudinary");
+const { Sequelize, Op } = require("sequelize");
 
 const getMyProfile = async (req, res) => {
   try {
@@ -42,4 +43,29 @@ const uploadAvatar = async (req, res) => {
   }
 };
 
-module.exports = { uploadAvatar, getMyProfile };
+const searchUsers = async (req, res) => {
+  try {
+    const { username } = req.query;
+
+    if (!username) {
+      return res.status(400).json({ error: "Thiếu tham số username" });
+    }
+
+    const users = await Users.findAll({
+      where: {
+        username: {
+          [Op.iLike]: `%${username}%`,
+        },
+      },
+      attributes: ["id", "username", "email"],
+      limit: 10,
+    });
+
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Không thể tìm kiếm người dùng" });
+  }
+};
+
+module.exports = { uploadAvatar, getMyProfile, searchUsers };
